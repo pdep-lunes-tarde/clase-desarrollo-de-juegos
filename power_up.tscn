@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bygjlv2vx3o2l"]
+
+[ext_resource type="Script" path="res://power_up.gd" id="1_88f1i"]
+[ext_resource type="Texture2D" uid="uid://c770ytfgyoyu4" path="res://assets/Mini Pixel Pack 3/Items/Power_item (16 x 16).png" id="2_raakq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbyki"]
+atlas = ExtResource("2_raakq")
+region = Rect2(20, 3, 8, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpdro"]
+radius = 24.5153
+
+[node name="PowerUp" type="Area2D"]
+position = Vector2(229, 503)
+collision_layer = 0
+script = ExtResource("1_88f1i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = SubResource("AtlasTexture_gbyki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xpdro")

@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhr5fcxxdiyhd"]
+
+[ext_resource type="Script" path="res://enemy_alan.gd" id="1_om561"]
+[ext_resource type="Texture2D" uid="uid://dny7n2je5jguv" path="res://assets/Mini Pixel Pack 3/Enemies/Alan (16 x 16).png" id="2_1cnpc"]
+[ext_resource type="Script" path="res://addons/shaker/shaker.gd" id="3_dnj6o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6bsh"]
+atlas = ExtResource("2_1cnpc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34sjo"]
+atlas = ExtResource("2_1cnpc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpn0a"]
+atlas = ExtResource("2_1cnpc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnk57"]
+atlas = ExtResource("2_1cnpc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8ymd"]
+atlas = ExtResource("2_1cnpc")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joy70"]
+atlas = ExtResource("2_1cnpc")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_862o1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6bsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34sjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpn0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnk57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8ymd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joy70")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aqwl2"]
+radius = 37.0135
+
+[sub_resource type="Curve" id="Curve_6p00v"]
+_data = [Vector2(0.0549451, 1), 0.0, 0.0, 0, 0, Vector2(0.745055, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Enemy" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 2
+script = ExtResource("1_om561")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_862o1")
+autoplay = "default"
+frame_progress = 0.0405195
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_aqwl2")
+
+[node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_dnj6o")
+target_node = NodePath("../AnimatedSprite2D")
+target_property = &"position"
+min_value = -5.0
+max_value = 5.0
+fall_off = SubResource("Curve_6p00v")
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cynisbmgj72n8"]
+
+[ext_resource type="Script" path="res://beam.gd" id="1_j80hj"]
+[ext_resource type="Texture2D" uid="uid://cmbjp2rs8wmvb" path="res://assets/Mini Pixel Pack 3/Projectiles/Player_charged_beam (16 x 16).png" id="2_tpmt4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmr2p"]
+atlas = ExtResource("2_tpmt4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0618h"]
+atlas = ExtResource("2_tpmt4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2j2l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmr2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0618h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vea4"]
+size = Vector2(62, 62.5)
+
+[node name="Beam" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_j80hj")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_n2j2l")
+autoplay = "default"
+frame_progress = 0.905024
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -0.25)
+shape = SubResource("RectangleShape2D_8vea4")
